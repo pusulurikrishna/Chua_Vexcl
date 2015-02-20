@@ -1,0 +1,94 @@
+<MediaConfig>
+    <Name>OpenCL™ runtime for Intel® Core™ and Xeon® processors,
+and Intel® Xeon Phi™ coprocessors (14.2)</Name>
+    <Description/>
+    <GUID>1407149831494</GUID>
+    <Product platform="INTEL64" id="1">
+        <Name>${SUITE_NAME}</Name>
+        <Description/>
+        <Layers>
+            <phonehome>
+                <HideActivateButton>0</HideActivateButton>
+                <HideOnLicenseTab>0</HideOnLicenseTab>
+            </phonehome>
+        </Layers>
+        <Component platform="INTEL64" invisible="0" id="1" depend="" cafe="false" mandatory="1" core="1">
+            <Name>OpenCL™ installable client driver loader</Name>
+            <Description/>
+            <Selected>1</Selected>
+            <Layers>
+                <phonehome>
+                    <IsmName>${SUITE_NAME}</IsmName>
+                    <IsmGuid>{E32D8E3E-CF55-425B-9E57-0A72077C8E0E}</IsmGuid>
+                    <IsmVersion>14.2</IsmVersion>
+                    <IsmUpdateId>l_ocl_runtime_x64-4.5.0.8</IsmUpdateId>
+                    <IsmMediaId>XXX</IsmMediaId>
+                    <HideActivateButton>0</HideActivateButton>
+                    <HideOnLicenseTab>0</HideOnLicenseTab>
+                </phonehome>
+            </Layers>
+            <RPMProductFamily>opencl-1.2-base</RPMProductFamily>
+            <RPMProductCode>opencl-1.2-base</RPMProductCode>
+            <Version>4.5.0.8</Version>
+            <RPMProductRelease>1</RPMProductRelease>
+            <RPMProductArch>x86_64</RPMProductArch>
+            <NONRPMProductCode>opencl-1.2-base-4.5.0.8-1.x86_64</NONRPMProductCode>
+            <Abbr>opencl-1.2-base__x86_64</Abbr>
+            <Data>1</Data>
+            <RPMFileDir>${PACKAGE_DIR}/rpm</RPMFileDir>
+        </Component>
+        <Component platform="INTEL64" invisible="0" id="2" depend="" cafe="false" mandatory="1" core="0">
+            <Name>OpenCL™ runtime for Intel® CPU device</Name>
+            <Description/>
+            <Selected>1</Selected>
+            <Layers>
+                <phonehome>
+                    <HideActivateButton>0</HideActivateButton>
+                    <HideOnLicenseTab>0</HideOnLicenseTab>
+                </phonehome>
+            </Layers>
+            <RPMProductFamily>opencl-1.2-intel-cpu</RPMProductFamily>
+            <RPMProductCode>opencl-1.2-intel-cpu</RPMProductCode>
+            <Version>4.5.0.8</Version>
+            <RPMProductRelease>1</RPMProductRelease>
+            <RPMProductArch>x86_64</RPMProductArch>
+            <NONRPMProductCode>opencl-1.2-intel-cpu-4.5.0.8-1.x86_64</NONRPMProductCode>
+            <Abbr>opencl-1.2-intel-cpu__x86_64</Abbr>
+            <Data>91</Data>
+            <RPMFileDir>${PACKAGE_DIR}/rpm</RPMFileDir>
+        </Component>
+        <Component platform="INTEL64" invisible="0" id="3" depend="" cafe="false" mandatory="0" core="0">
+            <Name>OpenCL™ runtime for Intel® Xeon Phi(TM) coprocessor device</Name>
+            <Description/>
+            <Selected>1</Selected>
+            <Layers>
+                <phonehome>
+                    <HideActivateButton>0</HideActivateButton>
+                    <HideOnLicenseTab>0</HideOnLicenseTab>
+                </phonehome>
+            </Layers>
+            <RPMProductFamily>opencl-1.2-intel-mic</RPMProductFamily>
+            <RPMProductCode>opencl-1.2-intel-mic</RPMProductCode>
+            <Version>4.5.0.8</Version>
+            <RPMProductRelease>1</RPMProductRelease>
+            <RPMProductArch>x86_64</RPMProductArch>
+            <NONRPMProductCode>opencl-1.2-intel-mic-4.5.0.8-1.x86_64</NONRPMProductCode>
+            <Abbr>opencl-1.2-intel-mic__x86_64</Abbr>
+            <Data>17</Data>
+            <RPMFileDir>${PACKAGE_DIR}/rpm</RPMFileDir>
+        </Component>
+        <Component platform="IA32;INTEL64" invisible="1" id="5" cafe="false" mandatory="1">
+            <Name>Uninstaller</Name>
+            <Description>Uninstaller</Description>
+            <RPMFileDir>${PACKAGE_DIR}/rpm</RPMFileDir>
+            <Version>4.5.0.8</Version>
+            <RPMProductRelease>1</RPMProductRelease>
+            <RPMProductArch>noarch</RPMProductArch>
+            <Selected>1</Selected>
+            <RPMProductCode>opencl-1.2-base-pset</RPMProductCode>
+            <NONRPMProductCode>opencl-1.2-base-pset-4.5.0.8-1.noarch</NONRPMProductCode>
+            <Abbr>opencl-1.2-base-pset</Abbr>
+            <Data>23</Data>
+        </Component>
+    </Product>
+</MediaConfig>

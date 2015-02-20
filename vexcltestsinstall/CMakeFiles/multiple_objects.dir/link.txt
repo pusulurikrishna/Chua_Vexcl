@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/multiple_objects.dir/dummy1.o CMakeFiles/multiple_objects.dir/dummy2.o  -o multiple_objects -rdynamic 

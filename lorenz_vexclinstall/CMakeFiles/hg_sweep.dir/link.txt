@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -Wall    CMakeFiles/hg_sweep.dir/hg_sweep.cpp.o  -o hg_sweep -rdynamic -lboost_filesystem -lboost_system -lboost_program_options -lcuda -lhdf5 -lhdf5_cpp 

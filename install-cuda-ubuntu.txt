@@ -1,0 +1,38 @@
+http://www.r-tutor.com/gpu-computing/cuda-installation/cuda6.5-ubuntu
+----------------------------------------------------------------------
+
+Installing CUDA Toolkit 6.5 on Ubuntu 14.04 Linux
+
+The following explains how to install CUDA Toolkit 6.5 on 64-bit Ubuntu 12.04 Linux. I have tested it on a self-assembled desktop with NVIDIA GeForce GTX 550 Ti graphics card. The instruction assumes you have the necessary CUDA compatible hardware support. Depending on your system configuration, your mileage may vary.
+
+CUDA Repository
+
+Retrieve the CUDA repository package for Ubuntu 14.04 from the CUDA download site and install it in a terminal.
+$ sudo dpkg -i cuda-repo-ubuntu1404_6.5-14_amd64.deb 
+$ sudo apt-get update
+
+CUDA Toolkit
+
+Then you can install the CUDA Toolkit using apt-get.
+$ sudo apt-get install cuda
+
+You should reboot the system afterwards and verify the driver installation with the nvidia-settings utility.
+
+Environment Variables
+
+As part of the CUDA environment, you should add the following in the .bashrc file of your home folder.
+export CUDA_HOME=/usr/local/cuda-6.5 
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
+ 
+PATH=${CUDA_HOME}/bin:${PATH} 
+export PATH
+
+CUDA SDK Samples
+
+Now you can copy the SDK samples into your home directory, and proceed with the build process.
+$ cuda-install-samples-6.5.sh  ~ 
+$ cd ~/NVIDIA_CUDA-6.5_Samples 
+$ make
+
+If everything goes well, you should be able to verify your CUDA installation by running the deviceQuery sample in bin/x86_64/linux/release.
+

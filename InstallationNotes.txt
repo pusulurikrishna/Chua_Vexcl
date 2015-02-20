@@ -1,0 +1,277 @@
+Final Steps :
+
+
+/* STEP 0 is one time installatio; already done if you are on the gpu machine with Tesla K40 in our lab. */
+0.	sudo apt-get install cmake libhdf5-serial-dev dvipng texlive texlive-latex-extra;
+	sudo python get-pip.py;
+	sudo pip install h5py;	
+	bzip2 -kd boost_1_57_0.tar.bz2 
+	tar xvf boost_1_57_0.tar 
+	cd boost_1_57_0
+	./bootstrap.sh --prefix=/usr && ./b2 stage threading=multi link=shared
+	sudo ./b2 install threading=multi link=shared
+	cd ../
+	sudo dpkg -i cuda-repo-ubuntu1404_6.5-14_amd64.deb 
+	sudo apt-get update
+	sudo apt-get install cuda
+/* one time installation ends here */
+
+1. git clone <my_workspace/gpu>
+2.      cd <GPU>
+
+3. Add the following to ~/.bashrc
+	export CUDA_HOME=/usr/local/cuda-6.5 
+	export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+	PATH=${CUDA_HOME}/bin:${PATH} 
+	export PATH
+
+4.	cd lorenz_vexclinstall
+	rm -rf *
+	cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/include     -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=../vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE ../lorenz_vexcl
+
+5.	./lorenz_sweep 
+6.	./plot_kneading.py -f lorenz.h5
+
+
+
+
+131.96.40.100
+131.96.40.174
+
+From Denis :
+
+The code I use to run these experiments is at https://github.com/ddemidov/lorenz_vexcl.
+In order to compile it, you'll need cmake, boost libraries, and vexcl library (https://github.com/ddemidov/vexcl). An OpenCL implementation should also be available.
+
+After you compile the code in lorenz_vexcl you will have four executables: sm_sweep, hg_sweep, lorenz_sweep, and new_sweep, which do parameter sweeps for the respective models. For example, to get the latest results I did:
+
+ ./new_sweep --tmax=1e4 --a_min=0 --a_max=2.5 --b_min=0 --b_max=2 --kmax=25 --out=new.h5
+
+Then you may plot the results with
+./plot_kneading -f new.h5 -b 1 -e 10
+
+
+
+Steps :
+
+1.git clone <> <>
+2. http://www.binarytides.com/linux-get-gpu-information/
+3. lshw -numeric -C display
+4. https://developer.nvidia.com/opencl
+5. open cl already supported by tesla drivers
+//      6. install cmake
+//	7. sudo apt-get install libboost-all-dev
+8. sudo apt-get install cmake libhdf5-serial-dev dvipng texlive texlive-latex-extra
+sudo pip install h5py
+
+
+
+// 9. locate libboost
+// DBOOST_ROOT=	/usr/lib/x86_64-linux-gnu/
+
+10.  mkdir vexclinstall
+ cd vexclinstall
+cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/     -DUSE_LIBCPP:BOOL=TRUE  ../vexcl
+make
+
+
+
+http://stackoverflow.com/questions/15855759/opencl-1-2-c-wrapper-undefined-reference-to-clreleasedevice?rq=1
+
+updated cuda also 
+cuda-repo-ubuntu1404_6.5-14_amd64.deb
+check cuda installation r-tutor link
+nvcc not found ; add cuda/bin path to sudo's PATH variable in a script and then run
+export PATH=/usr/local/cuda-6.5/bin:$PATH
+---------------------------------------------------
+The problem is that the OpenCL library that you are linking against does not support OpenCL 1.2. I suspect that you are linking against the OpenCL library from Nvidia, which has not been updated to provide OpenCL 1.2 functions.
+You cannot fix this by linking against the OpenCL 1.2 library from AMD as it will expect the Nvidia GPU to supply OpenCL 1.2 functions that is does not supply. The result will be a segfault (from personal experience).
+The best solution is to download the OpenCL 1.1 version of cl.hpp from Khronos and continue using the library provided by Nvidia.
+P.S. Where do you get the idea that the GTX 660 Ti supports OpenCL 1.2? I know Wikipedia says that they support OpenCL 1.2 but I have not seen any proof of that with the GTX 680 I have access to.
+
+
+with 1.2 compilation errors, with 1.1 everything compiles but segmentation fault
+---------------------------------------------------
+open cl 1.2 not supported by nvidia
+dpkg -i opencl-headers_1.1-2010.07.15-2_all.deb
+
+http://ftp.us.debian.org/debian/pool/main/k/khronos-opencl-headers/opencl-headers_1.2-2012.04.18a-1_all.deb
+
+###################################################################################################
+11.  vi lorenz_vexcl/hg_sweep.cpp .. commented boost/vexcl.hpp include in all sweep files
+
+cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr     -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE lorenz_vexcl
+make
+sudo make install
+
+segmentation faults.
+
+//enable core dumps
+ulimit -c unlimited 
+gdb --core=core
+
+wget http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.gz/download
+tar -xvzf download
+rm download
+extracted into boost_1_53_0
+sudo mv -i boost_1_53_0/ /usr/share/
+//unable to find boost libraries
+####################################################################################################
+
+11. download boost_1_57
+http://www.linuxfromscratch.org/blfs/view/svn/general/boost.html
+./bootstrap.sh --prefix=/usr && ./b2 stage threading=multi link=shared
+Now, as the root user:
+sudo ./b2 install threading=multi link=shared
+Installed directory : /usr/include/boost
+cmake -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/include    -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE lorenz_vexcl
+
+Again ./new_sweep gives segmentation fault
+
+https://github.com/ddemidov/vexcl/blob/master/DEPENDS.md
+Boost versions 1.48 and above should work. However, there is a known issue with Boost v1.49 through 1.51 resulting in a segmentation fault in code that uses sparse matrix vector products or stencil convolutions.
+
+get boost 1.48
+uninstall 1.57 
+sudo rm -rf /usr/include/boost/
+
+
+---------------------------------------------
+on PC
+
+GET open cl runtime for intel cpu https://software.intel.com/en-us/articles/opencl-drivers#philinux
+install
+requires MPSS
+https://software.intel.com/en-us/articles/intel-manycore-platform-software-stack-mpss#lx34rel
+https://software.intel.com/en-us/forums/topic/390630
+//https://github.com/pentschev/mpss-modules
+https://github.com/xdsopl/mpss-modules
+install location    /opt/intel/opencl-1.2-4.5.0.8
+-DOPENCL_LIBRARIES=/opt/intel
+https://github.com/malcolmroberts/opencl-intel-deb-patches
+
+sudo ln -s /opt/intel/opencl/lib64/libOpenCL.so /usr/lib/libOpenCL.so
+
+
+
+
+??
+export LD_LIBRARY_PATH=/opt/intel/opencl-1.2-4.5.0.8/lib64
+X
+
+??
+for cmake export DYLD_LIBRARY_PATH
+X
+
+set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} /opt/intel)
+
+https://software.intel.com/en-us/forums/topic/476020
+http://stackoverflow.com/questions/7657660/opencl-undefined-reference-but-lib-files-in-the-right-place
+http://stackoverflow.com/questions/11783932/how-to-add-linker-or-compile-flag-in-cmake-file
+
+
+test opencl : http://wiki.tiker.net/OpenCLHowTo#Testing
+
+worked fine 
+
+exported OpenCL_LIBPATH and OpenCL_INCPATH to /opt/intel/opencl/lib64 and .../include
+not required
+---------------------------------------------
+
+
+
+http://wiki.tiker.net/OpenCLHowTo
+amd-libopencl1
+beignet
+opencl-headers
+#didn't work
+
+build boost 1.48
+install
+threads not enabled error
+http://stackoverflow.com/questions/8297652/error-boost-disable-threads
+apply patch
+sudo rm -rf /usr/include/boost/
+build
+install
+still not working
+remove path use gcc 4.6 not 4.8, g++ also
+
+
+cd vexclinstall
+cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/     -DUSE_LIBCPP:BOOL=TRUE  ../vexcl
+make
+
+cd vexclinstall
+cmake -DBOOST_ROOT=/usr/  ../vexcl
+make 
+sudo make install
+
+cd lorenz_vexclinstall
+cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/include     -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=../vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE ../lorenz_vexcl
+
+
+//https://github.com/NeuralSandwich/Intel-OpenCL-CPU-Installer/blob/master/install.sh
+
+
+
+
+
+boost 1.57, vexcl build with cuda , lorenz build with cuda
+http://www.r-tutor.com/gpu-computing/cuda-installation/cuda6.5-ubuntu
+
+
+
+chua equations 
+
+
+sudo time ./chua_sweep --tmax=1e4 --a_min=1 --a_max=15 --b_min=1 --b_max=15 --kmax=25 --out=new.h5
+
+
+------------------
+test
+http://stackoverflow.com/questions/20707371/working-with-vexcl-compiling-binaries
+
+------------------------------------------
+eclipse
+http://choorucode.com/2014/01/15/how-to-change-make-location-in-eclipse/
+http://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.ptp.rdt.doc.user%2Fhtml%2Fgettingstarted%2Fcreating_a_remote_project.html
+http://www.cmake.org/Wiki/CMake:Eclipse_UNIX_Tutorial
+
+--------------------------------------------------
+
+lorenz tutorial
+
+http://www.boost.org/doc/libs/1_57_0/libs/numeric/odeint/doc/html/index.html
+http://www.boost.org/doc/libs/1_57_0/libs/numeric/odeint/doc/html/boost_numeric_odeint/tutorial/using_opencl_via_vexcl.html
+
+
+----------------------------------
+
+https://speakerdeck.com/ddemidov/vexcl-implementation-meeting-c-plus-plus-2014
+multithreading??
+http://stackoverflow.com/questions/9244481/how-to-get-100-cpu-usage-from-a-c-program
+https://github.com/ddemidov/vexcl/issues/124
+
+------------------------------------------------------
+nvcc not found
+So apparently, nvcc is not on the PATH when you run it with sudo. You can confirm this with:
+sudo bash -c 'echo $PATH'
+The easiest solution is to call sudo with the absolute path of nvcc:
+sudo $(which nvcc)
+When running commands without absolute path like nvcc, sudo uses the value of the secure_path configuration in /etc/sudoers as the PATH, for example in my system:
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+So even if you set PATH in one of the startup files that the shell normally sources, it won't work. If you want to make sudo nvcc work temporarily, just to get your build working, I think you have two options:
+Edit the installer script and change the lines with sudo nvcc to sudo /path/to/nvcc
+Create a symlink to nvcc in one of the directories listed in secure_path, like this: sudo ln -s /path/to/nvcc /sbin/nvcc
+
+
+--------------------------------------------------------
+
+CUDA Driver API Error (100 - CUDA_ERROR_NO_DEVICE)
+
+nvidia-smi -a
+
+http://stackoverflow.com/questions/13054262/cuda-runtime-api-error-38-no-cuda-capable-device-is-detected
+
+--------------------------------------------------------

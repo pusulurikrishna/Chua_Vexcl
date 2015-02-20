@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/logical.dir/logical.o  -o logical -rdynamic 

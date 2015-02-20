@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/krishna/workspace/GPU/vexcl/tests/cast.cpp
+boost/test/unit_test.hpp
+-
+vexcl/vector.hpp
+-
+vexcl/cast.hpp
+-
+context_setup.hpp
+/home/krishna/workspace/GPU/vexcl/tests/context_setup.hpp
+
+/home/krishna/workspace/GPU/vexcl/tests/context_setup.hpp
+vexcl/devlist.hpp
+-
+random_vector.hpp
+/home/krishna/workspace/GPU/vexcl/tests/random_vector.hpp
+
+/home/krishna/workspace/GPU/vexcl/tests/random_vector.hpp
+random
+-
+vector
+-
+vexcl/types.hpp
+-
+

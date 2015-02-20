@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/sort.dir/sort.o  -o sort -rdynamic 

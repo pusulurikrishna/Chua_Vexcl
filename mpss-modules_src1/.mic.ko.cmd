@@ -1,0 +1,1 @@
+cmd_/home/krishna/workspace/GPU/mpss-modules/mic.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/krishna/workspace/GPU/mpss-modules/mic.ko /home/krishna/workspace/GPU/mpss-modules/mic.o /home/krishna/workspace/GPU/mpss-modules/mic.mod.o

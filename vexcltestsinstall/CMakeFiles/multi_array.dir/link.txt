@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/multi_array.dir/multi_array.o  -o multi_array -rdynamic 

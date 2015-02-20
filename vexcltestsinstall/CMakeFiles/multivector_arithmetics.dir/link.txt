@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/multivector_arithmetics.dir/multivector_arithmetics.o  -o multivector_arithmetics -rdynamic 

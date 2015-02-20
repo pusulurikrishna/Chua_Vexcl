@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/vector_pointer.dir/vector_pointer.o  -o vector_pointer -rdynamic 

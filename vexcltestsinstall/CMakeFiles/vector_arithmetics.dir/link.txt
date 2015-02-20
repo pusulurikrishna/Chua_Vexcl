@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/vector_arithmetics.dir/vector_arithmetics.o  -o vector_arithmetics -rdynamic 

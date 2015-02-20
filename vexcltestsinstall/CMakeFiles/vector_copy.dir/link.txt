@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/vector_copy.dir/vector_copy.o  -o vector_copy -rdynamic 
