@@ -26,8 +26,9 @@ Final Steps :
 4.	cd lorenz_vexclinstall
 	rm -rf *
 	cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/include     -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=../vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE ../lorenz_vexcl
-5.	./lorenz_sweep 
-6.	./plot_kneading.py -f lorenz.h5
+5.	make all
+6.	./lorenz_sweep 
+7.	./plot_kneading.py -f lorenz.h5
 
 
 
