@@ -16,19 +16,16 @@ Final Steps :
 	sudo apt-get install cuda
 /* one time installation ends here */
 
-1. git clone <my_workspace/gpu>
-2.      cd <GPU>
-
+1. git clone https://github.com/pusulurikrishna/Chua_Vexcl.git
+2.      cd Chua_Vexcl
 3. Add the following to ~/.bashrc
 	export CUDA_HOME=/usr/local/cuda-6.5 
 	export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
 	PATH=${CUDA_HOME}/bin:${PATH} 
 	export PATH
-
 4.	cd lorenz_vexclinstall
 	rm -rf *
 	cmake -DVEXCL_BACKEND=CUDA -DBoost_NO_BOOST_CMAKE:BOOL=TRUE     -DBoost_NO_SYSTEM_PATHS:BOOL=TRUE     -DBOOST_ROOT=/usr/include     -DUSE_LIBCPP:BOOL=TRUE  -DVEXCL_ROOT=../vexcl -DBoost_DETAILED_FAILURE_MSG=TRUE ../lorenz_vexcl
-
 5.	./lorenz_sweep 
 6.	./plot_kneading.py -f lorenz.h5
 
@@ -137,7 +134,7 @@ sudo rm -rf /usr/include/boost/
 
 
 ---------------------------------------------
-on PC
+RUNNING ON PC :
 
 GET open cl runtime for intel cpu https://software.intel.com/en-us/articles/opencl-drivers#philinux
 install
